@@ -1,4 +1,8 @@
 .DS_Store
 .history
 .agent/
+.agents/
 notes/
+_site/
+.jekyll-cache/
+.sass-cache/

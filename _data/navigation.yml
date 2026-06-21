@@ -1,7 +1,7 @@
 # main links
 main:
-  - title: "Resume"
-    url: /resume/
+  - title: "Home"
+    url: /
 
 # Docs sidebar for Resume page
 docs:

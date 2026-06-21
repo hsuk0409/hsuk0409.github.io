@@ -1,0 +1,10 @@
+# 여기에 포트폴리오 메인 화면에 나열될 프로젝트들을 관리합니다.
+# status가 "completed"이면 활성화되어 클릭 시 해당 url로 이동하고,
+# status가 "in-progress"이면 회색으로 비활성화 처리되며 클릭이 되지 않습니다.
+
+- title: "Gunners Discord Notifier"
+  status: "completed"
+  description: "해외 공신력 있는 아스날 FC 소식(Reddit r/Gunners, 주요 언론사 RSS 등)을 실시간으로 수집하고 중복 필터링하여 디스코드 채널로 푸시 알림을 전송하는 경량 배치 애플리케이션"
+  tech_stack: ["TypeScript", "Node.js", "GitHub Actions", "Discord Webhook", "RSS Parser", "Vitest"]
+  url: "https://github.com/hsuk0409/gunners-discord-notifier"
+  discord_url: "https://discord.gg/swK4r3fJc"
