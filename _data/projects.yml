@@ -8,3 +8,10 @@
   tech_stack: ["TypeScript", "Node.js", "GitHub Actions", "Discord Webhook", "RSS Parser", "Vitest"]
   url: "https://github.com/hsuk0409/gunners-discord-notifier"
   discord_url: "https://discord.gg/swK4r3fJc"
+
+- title: "Clean-Edu"
+  status: "in-progress"
+  description: "악성 학부모의 상습 민원 및 폭언 등으로부터 교사의 정신건강을 보호하기 위해, WebRTC 실시간 STT 음성 감정 분석 및 AI 실시간 발언 제어(Mute/Hold), 그리고 즉각적인 비상 알림(카카오톡 등)을 제공하는 지능형 교직원 보호 SaaS"
+  tech_stack: ["Next.js", "React", "TypeScript", "WebRTC", "Web Speech API (STT)", "Node.js"]
+  url: "https://github.com/hsuk0409/clean-edu"
+
