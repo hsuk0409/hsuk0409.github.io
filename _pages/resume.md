@@ -15,9 +15,9 @@ sidebar:
 
 ## Introduction
 
-- **AI 에이전트 협업**: 단순한 코드 생성을 넘어 에이전트에게 비즈니스 맥락(Context)을 설계하고, 아키텍처적 의사결정을 주도하며 함께 최적의 솔루션을 도출하는 '에이전틱 워크플로우'를 지향합니다.
-- **실전적 AI 활용과 검증**: 6년의 백엔드 개발 경험을 토대로 AI의 결과물을 비판적으로 수용하며, 도메인 중심 설계(DDD)와 포트-어댑터 패턴 준수를 통해 지속 가능한 코드 품질을 유지합니다.
-- **성장하는 개발 문화**: 대 AI 시대를 맞아 에이전트와 질문하고 고민하며, 기술적 복잡도를 함께 해결해 나가는 동료 지향적 개발 문화를 실천하고 있습니다.
+- **도메인 중심 설계(DDD) & Port-Adapter 아키텍처**: 6년간의 백엔드 개발 경험을 바탕으로 복잡한 비즈니스 요구사항을 도메인 중심 설계(DDD)와 Port-Adapter 아키텍처를 통해 확장 가능하고 유지보수하기 쉬운 소프트웨어로 구현합니다.
+- **실시간 모니터링 & 동시성·보안 제어**: APM/PMM 기반 실시간 메트릭 분석을 통한 성능 최적화, TOCTOU 레이스 방지를 위한 원자적 상태 변경 제어, OTP/GCM 기반 다층 보안 체계를 직접 판단하고 구축합니다.
+- **아키텍처 제약 기반 에이전틱 워크플로우**: AI 에이전트를 개발 워크플로우에 적극 활용하되, 개발 전 설계 명세서(Session Implementation Plan) 및 포트-어댑터 제약 가이드라인을 선행 수립하여 기술 부채와 스파게티 코드 양산을 통제하고 검증된 고품질 코드를 생산합니다.
 
 ---
 
@@ -51,56 +51,44 @@ sidebar:
 
 _서버 개발자 / 정규직_
 
-- **인프라 아키텍처 개선과 데브옵스 환경 구축 (2025.11 - 2026.04)**
-  - **DB 성능 최적화와 모니터링 환경 구축:** 피크 타임에 발생하는 커넥션 풀 고갈과 CPU 과부하(100% 이상) 장애를 해결하고자 New Relic APM과 오픈소스 모니터링 도구(PMM) 교차 연동. 실시간 지표 분석을 바탕으로 복합 인덱스 설계 최적화와 쿼리 튜닝을 통해 서비스 단절 방지 및 CPU 사용률 안정화.
-  - **미디어 자산 스토리지 이전과 CDN 최적화:** 서버에 직접 업로드로 인한 디스크 포화 문제와 DB 내 바이너리(BLOB) 적재로 발생하던 통신 지연을 개선하고자 클라우드 스토리지와 CDN 도입. 저장 경로를 환경·도메인·날짜별로 체계화하고 이미지 자동 리사이징, PDF 지원 파이프라인을 구축하여 문서 서빙 성능 향상과 사용자 경험 개선.
-  - **컨테이너 기반 CI/CD 배포 파이프라인 자동화:** 배포 시 발생하는 환경 불일치 오류와 운영 서버 직접 빌드로 인한 리소스 경합 장애를 해결하고자 Docker 기반 컨테이너화 적용. GitHub Actions와 GHCR을 활용해 빌드 프로세스를 외부로 격리하고 Slack 웹훅을 연동하여 실시간 상황 공유가 가능한 무장애 배포 환경 구축.
-- **학원 관리 프로그램 개발과 에이전틱 프로세스 고도화 (2025.03 - 현재)**
-  - NestJS, Docker, MariaDB 기반 리눅스 환경 구축 및 관리.
-  - **아키텍처 제약 기반의 에이전틱 워크플로우(Agentic Workflow) 수립:** AI 에이전트 도입에 따른 스파게티 코드 양산과 기술 부채 리스크를 통제하고자 개발 전 설계 명세서(Session Implementation Plan) 및 포트-어댑터 패턴 가이드라인 선행 수립. 에이전트 산출물을 밀착 검증하고 피드백 루프를 반복하여 개발 리드타임 단축과 아키텍처 정합성 유지.
-  - **AI 페어 프로그래밍을 통한 주도적 성장:** 에이전트 코드 검증, 테스트, 피드백 과정에서 페어 프로그래밍 시너지를 도출하며 견고한 시스템 설계. 사전 개발 계획 설계 단계를 통해 서비스 도메인과 시스템 아키텍처를 깊게 고찰하고 설계 완성도를 높이며 엔지니어 역량 내재화.
+- **HR 전자계약 시스템 아키텍처 설계 & 동시성·보안 고도화 (2025.12 - 진행중)**
+  - **시스템 분리와 데이터 정합성**: 원생관리 시스템과 신규 전자계약(HR) 시스템을 분리하면서 발생할 수 있는 배포 충돌과 직원 데이터 동기화 지연 문제를 해결하고자, 포트·도메인은 분리하되 공통 스키마는 공유하는 모노레포 구조를 설계하고, 직원 마스터 데이터는 별도 동기화 배치나 복제본 없이 필요할 때마다 원본 시스템을 실시간으로 조회하는 방식을 선택. 동기화 지연으로 인한 데이터 불일치 가능성을 구조적으로 제거.
+  - **서명 동시성 및 보안 강화**: 계약서 서명 등 상태 전이 처리 시 동시 요청으로 인한 레이스 컨디션 위험과 계약서 내 민감정보(개인정보·재무정보) 유출 리스크를 해결하고자, TOCTOU 없는 원자적 상태 변경 로직과 AES-256-GCM 암호화·OTP 인증·이중 읽기 모델(법적 보존 의무와 프라이버시 노출 분리)을 적용. 현재도 계약서 작성·서명 플로우를 실사용 검증하며 기능을 지속 확장·운영 중.
+- **인프라 아키텍처 개선과 DB 성능 최적화 (2025.11 - 2026.04)**
+  - **DB 성능 최적화와 모니터링 환경 구축**: 피크 타임에 발생하는 커넥션 풀 고갈과 CPU 과부하(100% 이상) 장애를 해결하고자 New Relic APM과 오픈소스 모니터링 도구(PMM) 교차 연동. 실시간 지표 분석을 바탕으로 복합 인덱스 설계 최적화와 쿼리 튜닝을 통해 CPU 과부하를 안정적인 수준으로 낮추고 피크타임 커넥션 타임아웃 장애를 0건으로 통제.
+  - **미디어 자산 스토리지 이전과 CDN 최적화**: 서버에 직접 업로드로 인한 디스크 포화 문제와 DB 내 바이너리(BLOB) 적재로 발생하던 통신 지연을 개선하고자 클라우드 스토리지와 CDN 도입. 저장 경로를 환경·도메인·날짜별로 체계화하고 이미지 자동 리사이징, PDF 지원 파이프라인을 구축하여 문서 서빙 속도와 사용자 경험을 개선. 이후 CDN 버킷 정책에서 익명 사용자의 목록 조회·업로드·삭제가 가능한 취약점을 발견해 최소권한 정책으로 재설계하며 지속적으로 보안을 관리.
+  - **컨테이너 기반 CI/CD 배포 파이프라인 자동화**: 배포 시 발생하는 환경 불일치 오류와 운영 서버 직접 빌드로 인한 리소스 경합 장애를 해결하고자 Docker 기반 컨테이너화 적용. GitHub Actions와 GHCR을 활용해 빌드 프로세스를 외부로 격리하고 Slack 웹훅 연동으로 배포 상황을 실시간 공유. 이후 운영 서버 SSH를 특정 IP로 제한하면서 GitHub-hosted 러너의 유동 IP와 배포가 충돌하자, 셀프호스트 러너로 전환해 외부 노출 없이 보안 정책과 배포 자동화를 양립시키며 지속 관리.
+- **학원 관리 프로그램 개발 및 서버 구축 (2025.03 - 현재)**
+  - **아키텍처 제약 기반의 에이전틱 워크플로우(Agentic Workflow) 수립**: AI 에이전트 도입에 따른 스파게티 코드 양산과 기술 부채 리스크를 통제하고자, 개발 전 설계 명세서(Session Implementation Plan)와 Port-Adapter 패턴 가이드라인을 선행 수립. 에이전트 산출물을 코드 검증·테스트·피드백 루프로 밀착 검증하며 개발 리드타임 단축과 아키텍처 정합성을 동시에 확보. 이 과정에서 서비스 도메인과 시스템 아키텍처를 깊이 고찰하며 설계 역량을 함께 내재화.
 
 ### **지오아이티** (2023.06 - 2024.02)
 
-_백엔드 개발자 / 정규직_
+_서버 개발자 / 정규직_
 
-- **웹소켓 기반 라이딩 앱 서버 개발 및 개선 (2023.09 - 2024.01)**
-  - Node.js, Websocket, Cassandra 기반 고성능 통신 환경 구축.
-  - InnoDB 레코드 잠금 트랜잭션 제어를 사용하여 즐겨찾기 중복 저장 동시성 이슈 해결.
-  - 1,000줄 규모의 Stored Procedure를 JavaScript 코드로 리팩토링(500줄)하여 유지보수성 및 안정성 개선.
+- 웹소켓 기반 라이딩 앱 서버 개발(Node.js, Websocket, Cassandra). 동시성 이슈 해결 및 레거시 로직 리팩토링 경험.
 
 ### **더커머스** (2021.09 - 2023.05)
 
 _서버 개발자 / 정규직_
 
-- **결제 구독권 시스템 개발 및 고도화 (2022.04 - 2022.10)**
-  - Java, Spring Boot, MongoDB 기반 시스템 유지보수 및 기능 개선.
-  - DTO 활용을 통한 주요 비즈니스 로직 캡슐화 및 테스트 코드 작성.
-  - Spring Interceptor 및 Wrapper를 활용하여 요청 바디 스트림 재설정 문제 해결 및 결제 유효성 검증 최적화.
-- **오픈마켓 연동 개발 (2021.09 - 2022.03)**
-  - 롯데온, 카페24 등 다양한 오픈마켓 OpenAPI 연동(Python, Flask, AWS Lambda).
+- 결제 구독권 시스템 유지보수(Java, Spring Boot, MongoDB) 및 오픈마켓 OpenAPI 연동(롯데온, 카페24 등, Python/Flask/AWS Lambda) 개발.
 
 ### **빌리지피플** (2020.03 - 2021.08)
 
-_백엔드 개발자 / 정규직_
+_서버 개발자 / 정규직_
 
-- **포인트 자동화 시스템 개발 (2020.11 - 2021.02)**
-  - Spring Boot, JPA, Spring Quartz 기반 스케줄러 개발.
-  - DDD 기반 적립/차감 로직 설계 및 만료 포인트 자동 회수 시스템 구축.
-- **QueryDSL 도입 및 테스트 커버리지 확대**
-  - 복잡한 쿼리를 QueryDSL로 전환하여 개발 생산성 및 타입 안정성 확보.
-  - 170개 이상의 Junit 테스트 코드 및 Spring Rest Docs 기반 API 문서 자동화 구축.
+- 포인트 자동화 스케줄러 개발(Spring Boot, JPA, Spring Quartz) 및 QueryDSL 도입을 통한 쿼리 개선.
 
 ---
 
 ## Technical Skills
 
-- **Languages:** Java, Python, Node.js (JavaScript/TypeScript), Go, PHP
-- **Frameworks:** Spring Boot, NestJS, Flask, ExpressJS, Vue.js
-- **Infrastructure:** Docker, AWS (Lambda, API Gateway), MySQL, MariaDB, MongoDB, Redis, Linux
-- **AI & Collaborative Engineering:**
-  - **Tools:** Antigravity (Agentic Flow), Gemini, GitHub Copilot
-  - **Practices:** Agentic Workflow Design, Strategic Context Management, AI-Driven Architecture Refactoring, Verification & Validation
+- **Backend Languages & Frameworks:** Node.js (TypeScript/JavaScript), NestJS, Java, Spring Boot, Python, Flask, Go, PHP
+- **Databases & Caching:** MariaDB, MySQL, PostgreSQL, MongoDB, Redis, Cassandra
+- **Infrastructure & DevOps:** Docker, AWS (Lambda, API Gateway), Linux, GitHub Actions, GHCR, New Relic, PMM
+- **Architecture & AI Engineering:**
+  - Domain-Driven Design (DDD), Port-Adapter Architecture (Hexagonal Architecture), Monorepo Design, SSOT Pattern
+  - Agentic Workflow Design, Strategic Context Management, Antigravity, Session Implementation Plan (SIP)
 
 ---
 
