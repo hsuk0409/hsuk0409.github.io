@@ -1,21 +1,2 @@
-# main links
-main:
-  - title: "Home"
-    url: /
-
-# Docs sidebar for Resume page
-docs:
-  - title: "Resume Navigation"
-    children:
-      - title: "Introduction"
-        url: /resume/#introduction
-      - title: "Featured Projects"
-        url: /resume/#featured-projects
-      - title: "Work Experience"
-        url: /resume/#work-experience
-      - title: "Technical Skills"
-        url: /resume/#technical-skills
-      - title: "Education"
-        url: /resume/#education
-      - title: "Awards & Certificates"
-        url: /resume/#awards--certificates
+# main links (intentionally empty — site title already links home)
+main: []

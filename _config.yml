@@ -10,21 +10,18 @@ permalink        : /:categories/:title/
 
 # 2. 테마 설정 (필수)
 theme            : "minimal-mistakes-jekyll"
-minimal_mistakes_skin : "default" # "air", "contrast", "dark" 등으로 변경 가능합니다.
+minimal_mistakes_skin : "custom-dark" # 홈페이지(custom-home.html) 다크 팔레트에 맞춘 커스텀 스킨
 
 # 3. 저자 정보 (사이드바 출력용)
 author:
   name   : ""
-  bio    : "Antigravity 기반 에이전틱 프로그래밍 및 도메인 중심 설계" #
+  bio    : "에이전틱 프로그래밍 및 도메인 중심 설계" #
   location : "Seoul, Korea"
   #avatar : "/assets/images/profile.png" # 준비된 프로필 사진 경로
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/hsuk0409"
-    - label: "Blog"
-      icon: "fas fa-fw fa-link"
-      url: "https://earstone.tistory.com/"
 
 # 4. 빌드 설정 (필수)
 include: ["_pages"]

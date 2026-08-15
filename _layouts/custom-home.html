@@ -10,76 +10,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  
+  <link rel="stylesheet" href="{{ '/assets/css/portfolio-chrome.css' | relative_url }}">
+
   <style>
-    :root {
-      --bg-color: #0b0c0e;
-      --text-main: #f0f2f5;
-      --text-muted: #8b949e;
-      --text-dark: #484f58;
-      --border-color: rgba(255, 255, 255, 0.08);
-      --card-bg-completed: #161b22;
-      --card-bg-progress: #0d1117;
-      --accent-color: #58a6ff;
-      --badge-completed-bg: rgba(46, 160, 67, 0.15);
-      --badge-completed-text: #56d364;
-      --badge-progress-bg: rgba(240, 246, 252, 0.05);
-      --badge-progress-text: #8b949e;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    .container {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 80px 24px;
-    }
-
-    /* Masthead Header */
-    header.site-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 80px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    header.site-header a.site-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text-main);
-      text-decoration: none;
-      letter-spacing: -0.02em;
-    }
-
-    header.site-header nav a {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    header.site-header nav a:hover {
-      color: var(--text-main);
-    }
-
     /* Intro Section */
     section.intro {
       margin-bottom: 80px;
@@ -104,6 +37,16 @@
 
     section.intro p strong {
       font-weight: 500;
+      color: var(--text-main);
+    }
+
+    section.intro a {
+      color: var(--accent-color);
+      text-decoration: underline;
+      transition: color 0.2s ease;
+    }
+
+    section.intro a:hover {
       color: var(--text-main);
     }
 
@@ -248,28 +191,6 @@
       color: var(--text-main);
     }
 
-    /* Footer */
-    footer.site-footer {
-      margin-top: 100px;
-      padding-top: 30px;
-      border-top: 1px solid var(--border-color);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.85rem;
-      color: var(--text-dark);
-    }
-
-    footer.site-footer a {
-      color: var(--text-dark);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    footer.site-footer a:hover {
-      color: var(--text-muted);
-    }
-
     /* Discord Button Link Styling */
     .discord-link-wrapper {
       margin-top: auto;
@@ -339,7 +260,7 @@
     <header class="site-header">
       <a href="/" class="site-title">{{ site.name | default: "최현석" }}</a>
       <nav>
-        <a href="/">Home</a>
+        <a href="/ai-experience/">AI 활용 경험</a>
       </nav>
     </header>
 

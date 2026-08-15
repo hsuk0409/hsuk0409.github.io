@@ -1,0 +1,39 @@
+/* ==========================================================================
+   Custom dark skin — matches the homepage (custom-home.html) palette
+   ========================================================================== */
+
+/* Typography — mirrors the fonts loaded on the homepage */
+$sans-serif: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !default;
+$header-sans-serif: 'Outfit', $sans-serif !default;
+$monospace: 'JetBrains Mono', Monaco, Consolas, 'Lucida Console', monospace !default;
+
+$global-font-family: $sans-serif !default;
+$header-font-family: $header-sans-serif !default;
+$monospace-code: 'JetBrains Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+
+/* Colors — 1:1 with custom-home.html's :root variables */
+$background-color: #0b0c0e !default;
+$text-color: #f0f2f5 !default;
+$muted-text-color: #8b949e !default;
+$border-color: rgba(255, 255, 255, 0.08) !default;
+$code-background-color: #161b22 !default;
+$code-background-color-dark: #0d1117 !default;
+$form-background-color: #161b22 !default;
+$footer-background-color: #0d1117 !default;
+
+$primary-color: #58a6ff !default;
+$link-color: #58a6ff !default;
+$link-color-hover: mix(#fff, $link-color, 20%) !default;
+$link-color-visited: mix(#000, $link-color, 20%) !default;
+$masthead-link-color: $muted-text-color !default;
+$masthead-link-color-hover: $text-color !default;
+$navicon-link-color-hover: mix(#fff, $background-color, 15%) !default;
+
+$border-radius: 8px !default;
+
+.author__urls.social-icons i,
+.author__urls.social-icons .svg-inline--fa,
+.page__footer-follow .social-icons i,
+.page__footer-follow .social-icons .svg-inline--fa {
+  color: inherit;
+}

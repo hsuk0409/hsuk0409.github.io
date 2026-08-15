@@ -1,0 +1,48 @@
+---
+---
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  {% include head.html %}
+  <link rel="stylesheet" href="{{ '/assets/css/portfolio-chrome.css' | relative_url }}">
+</head>
+<body>
+
+  <div class="container container--wide">
+    <header class="site-header">
+      <a href="/" class="site-title">{{ site.name | default: "최현석" }}</a>
+      <nav>
+        <a href="{{ '/' | relative_url }}">← 홈</a>
+      </nav>
+    </header>
+
+    <main class="portfolio-article-layout">
+      <article class="page__content e-content portfolio-article">
+        {{ content }}
+      </article>
+
+      {% if page.toc %}
+        <div class="portfolio-toc">
+          <nav class="toc">
+            <header>
+              <h4 class="nav__title">
+                <i class="fas fa-{{ page.toc_icon | default: 'file-alt' }}"></i> {{ page.toc_label | default: "On this page" }}
+              </h4>
+            </header>
+            {% include toc.html sanitize=true html=content h_min=1 h_max=6 class="toc__menu" skip_no_ids=true %}
+          </nav>
+        </div>
+      {% endif %}
+    </main>
+
+    <footer class="site-footer">
+      <span>&copy; {{ site.time | date: "%Y" }} {{ site.name | default: "최현석" }}</span>
+      <div>
+        <a href="https://github.com/hsuk0409" target="_blank">GitHub</a>
+      </div>
+    </footer>
+  </div>
+
+  {% include scripts.html %}
+</body>
+</html>
