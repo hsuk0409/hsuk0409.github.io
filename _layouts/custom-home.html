@@ -104,8 +104,8 @@
 
     .project-card.completed:hover {
       transform: translateY(-4px);
-      border-color: rgba(88, 166, 255, 0.3);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(88, 166, 255, 0.05);
+      border-color: rgba(9, 105, 218, 0.35);
+      box-shadow: 0 12px 30px rgba(31, 35, 40, 0.1), 0 0 15px rgba(9, 105, 218, 0.08);
     }
 
     .project-card.completed:hover .project-title {
@@ -151,13 +151,13 @@
     .status-badge.badge-completed {
       background-color: var(--badge-completed-bg);
       color: var(--badge-completed-text);
-      border: 1px solid rgba(86, 211, 100, 0.2);
+      border: 1px solid rgba(26, 127, 55, 0.25);
     }
 
     .status-badge.badge-inprogress {
       background-color: var(--badge-progress-bg);
       color: var(--badge-progress-text);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(31, 35, 40, 0.12);
     }
 
     .project-desc {
@@ -180,14 +180,14 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       color: var(--text-muted);
-      background-color: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background-color: rgba(31, 35, 40, 0.04);
+      border: 1px solid rgba(31, 35, 40, 0.08);
       padding: 2px 8px;
       border-radius: 6px;
     }
 
     .project-card.completed:hover .tech-tag {
-      border-color: rgba(88, 166, 255, 0.15);
+      border-color: rgba(9, 105, 218, 0.2);
       color: var(--text-main);
     }
 
@@ -261,6 +261,8 @@
       <a href="/" class="site-title">{{ site.name | default: "최현석" }}</a>
       <nav>
         <a href="/ai-experience/">AI 활용 경험</a>
+        <span class="nav-divider">|</span>
+        <a href="/resume/">이력 보기</a>
       </nav>
     </header>
 
@@ -329,8 +331,7 @@
     <footer class="site-footer">
       <span>&copy; {{ site.time | date: "%Y" }} {{ site.name | default: "최현석" }}</span>
       <div>
-        <a href="https://github.com/hsuk0409" target="_blank" style="margin-right: 12px;">GitHub</a>
-        <a href="https://earstone.tistory.com/" target="_blank">Blog</a>
+        <a href="https://github.com/hsuk0409" target="_blank">GitHub</a>
       </div>
     </footer>
   </div>

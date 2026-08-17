@@ -5,18 +5,18 @@
 */
 
 :root {
-  --bg-color: #0b0c0e;
-  --text-main: #f0f2f5;
-  --text-muted: #8b949e;
-  --text-dark: #484f58;
-  --border-color: rgba(255, 255, 255, 0.08);
-  --card-bg-completed: #161b22;
-  --card-bg-progress: #0d1117;
-  --accent-color: #58a6ff;
-  --badge-completed-bg: rgba(46, 160, 67, 0.15);
-  --badge-completed-text: #56d364;
-  --badge-progress-bg: rgba(240, 246, 252, 0.05);
-  --badge-progress-text: #8b949e;
+  --bg-color: #ffffff;
+  --text-main: #1f2328;
+  --text-muted: #57606a;
+  --text-dark: #8c959f;
+  --border-color: #d8dee4;
+  --card-bg-completed: #f6f8fa;
+  --card-bg-progress: #eef1f4;
+  --accent-color: #0969da;
+  --badge-completed-bg: rgba(26, 127, 55, 0.12);
+  --badge-completed-text: #1a7f37;
+  --badge-progress-bg: rgba(31, 35, 40, 0.06);
+  --badge-progress-text: #57606a;
 }
 
 * {
@@ -28,10 +28,11 @@
 /*
   minimal-mistakes bumps the root font-size at wider breakpoints
   (16px → 18px → 20px → 22px), which made resume/ai-experience text
-  visibly bigger than the homepage. Pin it back to the homepage's fixed 16px.
+  visibly bigger than the homepage. Pin it to one fixed size across
+  the whole site instead.
 */
 html {
-  font-size: 16px;
+  font-size: 18px;
 }
 
 ::-moz-selection {
@@ -45,6 +46,7 @@ html {
 }
 
 body {
+  color-scheme: light;
   background-color: var(--bg-color);
   color: var(--text-main);
   font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -82,6 +84,12 @@ header.site-header a.site-title {
   letter-spacing: -0.02em;
 }
 
+header.site-header nav {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
 header.site-header nav a {
   font-family: 'Outfit', sans-serif;
   font-size: 0.95rem;
@@ -93,6 +101,11 @@ header.site-header nav a {
 
 header.site-header nav a:hover {
   color: var(--text-main);
+}
+
+header.site-header nav .nav-divider {
+  color: var(--border-color);
+  font-size: 0.85rem;
 }
 
 /* Footer */
@@ -145,4 +158,67 @@ footer.site-footer a:hover {
     width: 100%;
     position: static;
   }
+}
+
+/* minimal-mistakes ships the TOC at ~0.7em (and shrinks it further on
+   wide screens) — too small next to the rest of the article text. */
+.portfolio-toc .nav__title {
+  font-size: 1rem;
+}
+
+.portfolio-toc .toc__menu {
+  font-size: 0.95rem;
+}
+
+.portfolio-toc .toc__menu a {
+  padding: 0.4rem 0.9rem;
+}
+
+/*
+  Work Experience (resume.md): every company block starts with a
+  "_역할 / 재직상태_" line, then either a lead description paragraph with a
+  flat bullet list (지오아이티/더커머스/빌리지피플), or several
+  "- **Project (period)**" entries each with their own description +
+  nested detail bullets (피에스에듀홀딩스). Scoping every rule off that
+  role line keeps this from also matching unrelated nested lists elsewhere
+  on the page (e.g. Technical Skills' "Architecture & AI Engineering").
+*/
+
+/* Project/company header line: drop the bullet, it already reads as a
+   heading via the bold text. */
+.page__content p:has(> em) + ul > li:has(> ul) {
+  list-style: none;
+}
+
+.page__content p:has(> em) + ul > li:has(> ul) + li:has(> ul) {
+  margin-top: 1.5rem;
+}
+
+/* Lead description — the sentence right under the title/role, before the
+   detail bullets. Italic + muted is enough to read as a subordinate line. */
+.page__content p:has(> em) + ul > li:has(> ul) > p + p,
+.page__content p:has(> em) + p {
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+/* Detail bullets — same small dot, but plain text color so it still
+   matches the default bullets used everywhere else on the page (e.g.
+   Technical Skills). */
+.page__content p:has(> em) + ul > li:has(> ul) > ul > li,
+.page__content p:has(> em) + p + ul > li {
+  position: relative;
+  list-style: none;
+}
+
+.page__content p:has(> em) + ul > li:has(> ul) > ul > li::before,
+.page__content p:has(> em) + p + ul > li::before {
+  content: '';
+  position: absolute;
+  left: -1rem;
+  top: 0.55em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-main);
 }
