@@ -13,7 +13,7 @@
   description: "해외 공신력 있는 아스날 FC 소식(Reddit r/Gunners, 주요 언론사 RSS 등)을 실시간으로 수집하고 중복 필터링하여 디스코드 채널로 푸시 알림을 전송하는 경량 배치 애플리케이션. 각 알림에서 원하는 기사를 버튼 클릭 한 번으로 본인 카카오톡에도 공유 가능"
   tech_stack: ["TypeScript", "Node.js", "GitHub Actions", "Discord Webhook", "RSS Parser", "Vitest", "GitHub Pages", "Web Share API"]
   url: "https://github.com/hsuk0409/gunners-discord-notifier"
-  discord_url: "https://discord.gg/swK4r3fJc"
+  discord_url: "https://discord.gg/YQU5XdW4n3"
 
 - title: "Elderly Fall Guard"
   status: "completed"
