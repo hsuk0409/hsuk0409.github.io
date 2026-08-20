@@ -5,6 +5,7 @@ permalink: /resume/
 toc: true
 toc_sticky: true
 toc_label: "목차"
+print_append: /ai-experience/
 ---
 
 # 최 현 석 (Choi Hyeon-suk)
@@ -20,6 +21,7 @@ AI 에이전트를 개발 워크플로우에 적극 활용하되, 설계 명세�
 이렇게 확보한 여력은 APM/PMM 기반 실시간 모니터링, 동시성·보안 설계, 트래픽 대응 등 데브옵스 영역에 재투자해 서비스가 안정적으로 운영되도록 힘쓰고 있습니다.
 
 → [AI 활용 경험 자세히 보기](/ai-experience/)
+{: .no-print}
 
 ---
 

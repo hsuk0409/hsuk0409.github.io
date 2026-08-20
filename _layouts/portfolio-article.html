@@ -28,6 +28,20 @@
     <main class="portfolio-article-layout">
       <article class="page__content e-content portfolio-article">
         {{ content }}
+        {%- if page.print_append -%}
+          {%- assign appended = site.pages | where: "url", page.print_append | first -%}
+          {%- if appended -%}
+            {%- comment -%}
+              화면에는 절대 노출하지 않는다(.print-append: display:none). 인쇄(@media
+              print)할 때만 이 페이지 아래에 이어 붙여, 이력서+AI 활용 경험이 PDF 한
+              벌로 나오게 한다. 원래 문서 제목이던 h1은 h2로 낮춰 이 페이지의
+              "Work Experience"·"Technical Skills"와 같은 급의 새 섹션으로 붙게 한다.
+            {%- endcomment -%}
+            <div class="print-append">
+              {{ appended.content | replace: '<h1 ', '<h2 ' | replace: '<h1>', '<h2>' | replace: '</h1>', '</h2>' }}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
       </article>
 
       {% if page.toc %}
