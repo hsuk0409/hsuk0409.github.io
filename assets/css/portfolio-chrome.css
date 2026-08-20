@@ -369,13 +369,33 @@ footer.site-footer a:hover {
   margin: 0 0 0.15rem;
 }
 
+/*
+  회사명 강조. 프로젝트 제목(0.94rem)과 크기 차이가 2px뿐이라 회사가 한
+  단위로 잡히지 않던 것을, 크기를 키우고 홈 히어로와 같은 민트 하이라이터를
+  깔아 해결한다. 하이라이터는 글자 뒤에 깔리므로 대비에 영향을 주지 않는다.
+*/
 .portfolio-article .job > h3 strong {
   font-family: 'Outfit', sans-serif;
-  font-size: 1.5em;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-size: 1.85em;
+  font-weight: 700;
+  letter-spacing: -0.03em;
   color: var(--text-main);
-  margin-right: 10px;
+  margin-right: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.portfolio-article .job > h3 strong::after {
+  content: '';
+  position: absolute;
+  left: -0.05em;
+  right: -0.05em;
+  bottom: 0.02em;
+  height: 0.32em;
+  background-color: var(--accent-pop);
+  opacity: 0.42;
+  border-radius: 2px;
+  z-index: -1;
 }
 
 /* '_서버 개발자 / 정규직_' 역할 줄 */
@@ -620,6 +640,70 @@ footer.site-footer a:hover {
     display: block;
     width: auto;
     margin-bottom: 4px;
+  }
+}
+
+/*
+  AI 활용 원칙 — 사례를 읽기 전에 판단 기준을 한눈에 보여주는 요약.
+  본문 섹션이 아니라 보조 요약이므로 h2를 두지 않고(목차에도 잡히지 않음)
+  카드도 작게 유지한다.
+*/
+.portfolio-article .principles {
+  margin-bottom: 1.6rem;
+}
+
+.portfolio-article .principles > ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.portfolio-article .principles > ul > li {
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 13px 15px;
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  word-break: keep-all;
+}
+
+.portfolio-article .principles > ul > li::before {
+  content: none;
+}
+
+.portfolio-article .principles > ul > li > strong {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  margin-bottom: 5px;
+  position: relative;
+  padding-left: 12px;
+}
+
+.portfolio-article .principles > ul > li > strong::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--accent-pop);
+}
+
+@media (max-width: 700px) {
+  .portfolio-article .principles > ul {
+    grid-template-columns: 1fr;
   }
 }
 
