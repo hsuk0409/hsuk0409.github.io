@@ -12,17 +12,17 @@ $header-font-family: $header-sans-serif !default;
 $monospace-code: 'JetBrains Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
 
 /* Colors — 1:1 with custom-home.html's :root variables */
-$background-color: #ffffff !default;
-$text-color: #1f2328 !default;
-$muted-text-color: #57606a !default;
-$border-color: #d8dee4 !default;
-$code-background-color: #f6f8fa !default;
-$code-background-color-dark: #eef1f4 !default;
-$form-background-color: #f6f8fa !default;
-$footer-background-color: #f6f8fa !default;
+$background-color: #fcfcfb !default;
+$text-color: #16181d !default;
+$muted-text-color: #5b6470 !default;
+$border-color: #e2e4e7 !default;
+$code-background-color: #f5f6f5 !default;
+$code-background-color-dark: #eceeed !default;
+$form-background-color: #f5f6f5 !default;
+$footer-background-color: #f5f6f5 !default;
 
-$primary-color: #0969da !default;
-$link-color: #0969da !default;
+$primary-color: #0d7a68 !default;
+$link-color: #0d7a68 !default;
 $link-color-hover: mix(#000, $link-color, 15%) !default;
 $link-color-visited: mix(#000, $link-color, 30%) !default;
 $masthead-link-color: $muted-text-color !default;
