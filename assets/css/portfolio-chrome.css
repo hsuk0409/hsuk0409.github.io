@@ -103,16 +103,19 @@ header.site-header {
 */
 header.site-header .site-brand {
   display: inline-flex;
-  align-items: baseline;
+  /*
+    baseline 정렬이면 작은 모노 라벨이 이름의 베이스라인에 붙어 아래로 처진다.
+    이름 높이의 상하 중앙에 오도록 center로 맞춘다.
+  */
+  align-items: center;
   gap: 10px;
   text-decoration: none;
 }
 
 header.site-header .site-brand-sep {
   width: 1px;
-  height: 0.85em;
+  height: 0.9em;
   background-color: var(--border-color);
-  align-self: center;
 }
 
 header.site-header .site-title {
