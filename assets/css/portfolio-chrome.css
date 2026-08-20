@@ -570,7 +570,7 @@ footer.site-footer a:hover {
 */
 .portfolio-article .kv > ul > li {
   position: relative;
-  padding: 12px 16px 12px 130px;
+  padding: 12px 16px 12px 152px;
   border-top: 1px solid var(--border-color);
   margin: 0;
   font-size: 0.87rem;
@@ -589,20 +589,24 @@ footer.site-footer a:hover {
 /*
   라벨 열. 마크다운은 '- **라벨:** 내용' 형태로 콜론을 볼드 안에 둔다.
   CSS가 적용되지 않아도 '라벨: 내용'으로 자연스럽게 읽히게 하기 위함.
+
+  반드시 :first-child로 한정할 것. 그냥 'li > strong'으로 잡으면 값 안에
+  들어간 볼드(예: 수치 강조)까지 라벨로 인식해 absolute로 겹쳐 버린다.
 */
-.portfolio-article .kv > ul > li > strong {
+.portfolio-article .kv > ul > li > strong:first-child {
   position: absolute;
   left: 16px;
   top: 12px;
-  width: 100px;
+  /* 가장 긴 라벨('승인 대기 관리:')이 한 줄에 들어가는 값 */
+  width: 122px;
   padding-left: 13px;
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-main);
-  word-break: keep-all;
+  white-space: nowrap;
 }
 
-.portfolio-article .kv > ul > li > strong::before {
+.portfolio-article .kv > ul > li > strong:first-child::before {
   content: '';
   position: absolute;
   left: 0;
@@ -618,7 +622,7 @@ footer.site-footer a:hover {
   padding-left: 206px;
 }
 
-.portfolio-article .kv--wide > ul > li > strong {
+.portfolio-article .kv--wide > ul > li > strong:first-child {
   width: 176px;
 }
 
@@ -634,11 +638,12 @@ footer.site-footer a:hover {
     padding-left: 16px;
   }
 
-  .portfolio-article .kv > ul > li > strong,
-  .portfolio-article .kv--wide > ul > li > strong {
+  .portfolio-article .kv > ul > li > strong:first-child,
+  .portfolio-article .kv--wide > ul > li > strong:first-child {
     position: static;
     display: block;
     width: auto;
+    white-space: normal;
     margin-bottom: 4px;
   }
 }
