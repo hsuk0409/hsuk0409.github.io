@@ -306,9 +306,14 @@ footer.site-footer a:hover {
 */
 .portfolio-article h2 {
   font-family: 'Outfit', sans-serif;
-  font-size: 1.05rem;
+  /*
+    본문 16px / h3 17.9px / h2 20px / 문서 제목 32px 순으로 위계를 벌린다.
+    1.05rem(16.8px)일 때는 본문과 0.8px 차이뿐이라 h3를 그 사이에 둘 자리가
+    없었다. 자간은 크기가 커진 만큼 0.08em -> 0.06em으로 줄인다.
+  */
+  font-size: 1.25rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text-main);
   display: flex;
@@ -535,13 +540,17 @@ footer.site-footer a:hover {
   margin-bottom: 0.9rem;
 }
 
-/* ai-experience: h2 아래 h3는 소제목. h2보다 작아야 위계가 유지된다. */
+/*
+  ai-experience의 소제목. 본문(16px)보다는 확실히 크고 섹션 제목(20px)보다는
+  작아야 한다. 이력서의 회사명(.job > h3)은 별도 규칙이라 영향받지 않는다.
+*/
 .portfolio-article > h3 {
   font-family: 'Outfit', sans-serif;
-  font-size: 0.98rem;
+  font-size: 1.12rem;
   font-weight: 600;
   letter-spacing: -0.02em;
-  margin: 1.8rem 0 0.6rem;
+  color: var(--text-main);
+  margin: 2rem 0 0.6rem;
 }
 
 /* ==========================================================================
