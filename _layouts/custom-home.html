@@ -13,41 +13,91 @@
   <link rel="stylesheet" href="{{ '/assets/css/portfolio-chrome.css' | relative_url }}">
 
   <style>
-    /* Intro Section */
+    /* ── Hero ──────────────────────────────────────────────
+       h1은 두 줄 한 덩어리다. 윗줄(.intro-greet)이 인사, 아랫줄이 포지셔닝
+       문장. 위계는 글자 크기가 잡으므로 색은 둘 다 --text-main으로 두고,
+       색 대비는 아래 회색 본문(.intro p)과의 사이에서 만든다.
+       ───────────────────────────────────────────────────── */
     section.intro {
       margin-bottom: 80px;
+      max-width: 900px;
     }
 
     section.intro h1 {
       font-family: 'Outfit', sans-serif;
-      font-size: 2.25rem;
-      font-weight: 600;
-      line-height: 1.25;
-      margin-bottom: 24px;
-      letter-spacing: -0.03em;
+      /*
+        .mark(하이라이터)는 줄바꿈 금지라 좁은 화면에서 가로로 넘친다.
+        화면 폭에 따라 줄어들도록 clamp로 묶어둔다. 고정값으로 되돌릴 경우
+        360px 폭에서 가로 스크롤이 생기므로 함께 확인할 것.
+      */
+      font-size: clamp(1.7rem, 5.2vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.24;
+      margin-bottom: 26px;
+      letter-spacing: -0.035em;
+      word-break: keep-all;
+    }
+
+    section.intro h1 .intro-greet {
+      display: block;
+      font-size: 0.56em;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    /* 민트 하이라이터. 글자 뒤에 깔리므로 대비에 영향을 주지 않는다. */
+    section.intro h1 .mark {
+      position: relative;
+      z-index: 1;
+      white-space: nowrap;
+    }
+
+    section.intro h1 .mark::after {
+      content: '';
+      position: absolute;
+      left: -0.06em;
+      right: -0.06em;
+      bottom: 0.06em;
+      height: 0.3em;
+      background-color: var(--accent-pop);
+      opacity: 0.45;
+      border-radius: 2px;
+      z-index: -1;
     }
 
     section.intro p {
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 300;
       color: var(--text-muted);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       word-break: keep-all;
     }
 
     section.intro p strong {
       font-weight: 500;
       color: var(--text-main);
+      box-shadow: inset 0 -0.42em 0 var(--accent-soft);
     }
 
-    section.intro a {
-      color: var(--accent-color);
-      text-decoration: underline;
-      transition: color 0.2s ease;
+    /*
+      본문은 쉼표 뒤에서 의미 단위로 끊는다(<br class="wrap-br">).
+      좁은 화면에서는 그 줄바꿈이 오히려 어색해지므로 해제하고
+      브라우저 자동 줄바꿈에 맡긴다.
+      기준점 800px = 가장 긴 절(739px) + 컨테이너 좌우 패딩(48px)에
+      약간의 여유를 더한 값. 루트 폰트 크기를 바꾸면 이 값도 다시 재야 한다.
+    */
+    @media (max-width: 800px) {
+      section.intro p br.wrap-br {
+        display: none;
+      }
     }
 
-    section.intro a:hover {
-      color: var(--text-main);
+    section.intro .intro-cta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 30px;
     }
 
     /* Services/Projects Section */
@@ -104,8 +154,8 @@
 
     .project-card.completed:hover {
       transform: translateY(-4px);
-      border-color: rgba(9, 105, 218, 0.35);
-      box-shadow: 0 12px 30px rgba(31, 35, 40, 0.1), 0 0 15px rgba(9, 105, 218, 0.08);
+      border-color: rgba(13, 122, 104, 0.32);
+      box-shadow: 0 12px 28px rgba(22, 24, 29, 0.07);
     }
 
     .project-card.completed:hover .project-title {
@@ -151,13 +201,13 @@
     .status-badge.badge-completed {
       background-color: var(--badge-completed-bg);
       color: var(--badge-completed-text);
-      border: 1px solid rgba(26, 127, 55, 0.25);
+      border: 1px solid rgba(13, 122, 104, 0.22);
     }
 
     .status-badge.badge-inprogress {
       background-color: var(--badge-progress-bg);
       color: var(--badge-progress-text);
-      border: 1px solid rgba(31, 35, 40, 0.12);
+      border: 1px solid rgba(22, 24, 29, 0.10);
     }
 
     .project-desc {
@@ -180,14 +230,14 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       color: var(--text-muted);
-      background-color: rgba(31, 35, 40, 0.04);
-      border: 1px solid rgba(31, 35, 40, 0.08);
+      background-color: rgba(22, 24, 29, 0.035);
+      border: 1px solid rgba(22, 24, 29, 0.07);
       padding: 2px 8px;
       border-radius: 6px;
     }
 
     .project-card.completed:hover .tech-tag {
-      border-color: rgba(9, 105, 218, 0.2);
+      border-color: rgba(13, 122, 104, 0.25);
       color: var(--text-main);
     }
 
@@ -258,11 +308,14 @@
   <div class="container">
     <!-- Header -->
     <header class="site-header">
-      <a href="/" class="site-title">{{ site.name | default: "최현석" }}</a>
+      <a href="{{ '/' | relative_url }}" class="site-brand">
+        <span class="site-title">{{ site.name | default: "최현석" }}</span>
+        <span class="site-brand-sep"></span>
+        <span class="site-role">Backend Engineer</span>
+      </a>
       <nav>
-        <a href="/ai-experience/">AI 활용 경험</a>
-        <span class="nav-divider">|</span>
-        <a href="/resume/">이력 보기</a>
+        <a href="{{ '/ai-experience/' | relative_url }}" class="nav-link">AI 활용 경험</a>
+        <a href="{{ '/resume/' | relative_url }}" class="btn btn--pop btn--sm">이력서 보기</a>
       </nav>
     </header>
 

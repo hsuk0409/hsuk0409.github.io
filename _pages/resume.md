@@ -25,6 +25,8 @@ AI 에이전트를 개발 워크플로우에 적극 활용하되, 설계 명세�
 
 ## Work Experience
 
+<div class="job" markdown="1">
+
 ### **피에스에듀홀딩스** (2024.05 - 현재)
 
 _서버 개발자 / 정규직_
@@ -54,6 +56,10 @@ _서버 개발자 / 정규직_
   - **결제 모듈(카드결제·PG 링크결제) 연동 및 장애 대응**: 학원 원비 결제를 카드 단말결제와 PG(알림톡 기반 링크결제) 두 경로로 지원. 결제 콜백 유실에 대비해 30분 주기로 누락 건을 탐지·자동 복구하는 스케줄러를 구축했고, 여러 서버 인스턴스가 동시에 같은 크론을 실행하며 중복 처리되는 것을 막기 위해 Redis 분산 락으로 동시성을 제어. 이 복구 로직이 앱을 통한 결제는 애초에 탐지 대상에서 누락되는 구조적 결함을 발견해 별도 마커 기반 감지 로직으로 해결. 배치 단위로 묶여 처리되던 동기화 작업에서 한 건의 오류가 정상 건까지 포함한 배치 전체를 롤백시키는 문제도 발견해, 레코드 단위로 트랜잭션과 오류를 격리하도록 재설계.
   - **배포 거버넌스를 위한 브랜치 병합 게이트 구축**: 개발 중인 내용이 실수로 main 브랜치에 병합되어 자동 배포되는 상황을 막기 위해, develop 브랜치의 커밋이 직접·병합·리베이스 등 어떤 경로로 유입되든 차단하는 GitHub Actions 필수 상태 검사(커밋 조상 기반 브랜치 보호 게이트)를 설계·구축. 초기 버전이 머지 커밋 없이 develop 위에서 곧바로 분기한 브랜치를 놓치는 구멍을 스스로 재검증해, head의 커밋 전체를 develop 조상 여부로 검사하는 방식으로 보완하고 실제 테스트 PR로 차단 동작까지 라이브 검증.
 
+</div>
+
+<div class="job" markdown="1">
+
 ### **지오아이티** (2023.06 - 2024.02)
 
 _서버 개발자 / 정규직_
@@ -64,6 +70,10 @@ _서버 개발자 / 정규직_
 - **동시성 이슈 해결**: InnoDB 레코드 잠금 트랜잭션 제어를 활용해 즐겨찾기 중복 저장 동시성 이슈 해결.
 - **레거시 로직 리팩토링**: 1,000줄 규모의 Stored Procedure를 JavaScript 코드로 리팩토링(500줄)해 유지보수성 및 안정성 개선.
 
+</div>
+
+<div class="job" markdown="1">
+
 ### **더커머스** (2021.09 - 2023.05)
 
 _서버 개발자 / 정규직_
@@ -72,6 +82,10 @@ _서버 개발자 / 정규직_
 
 - **결제 구독권 시스템 개발 및 고도화**: Java·Spring Boot·MongoDB 기반 시스템 유지보수 및 기능 개선. DTO를 활용해 주요 비즈니스 로직을 캡슐화하고 테스트 코드 작성. Spring Interceptor·Wrapper로 요청 바디 스트림 재설정 문제를 해결해 결제 유효성 검증 최적화.
 - **오픈마켓 연동 개발**: 롯데온·카페24 등 다양한 오픈마켓 OpenAPI 연동(Python, Flask, AWS Lambda).
+
+</div>
+
+<div class="job" markdown="1">
 
 ### **빌리지피플** (2020.03 - 2021.08)
 
@@ -82,9 +96,13 @@ _서버 개발자 / 정규직_
 - **포인트 자동화 시스템 개발**: Spring Boot·JPA·Spring Quartz 기반 스케줄러 개발. DDD 기반 적립/차감 로직 설계 및 만료 포인트 자동 회수 시스템 구축.
 - **QueryDSL 도입 및 테스트 커버리지 확대**: 복잡한 쿼리를 QueryDSL로 전환해 개발 생산성 및 타입 안정성 확보. 170개 이상의 JUnit 테스트 코드와 Spring Rest Docs 기반 API 문서 자동화 구축.
 
+</div>
+
 ---
 
 ## Technical Skills
+
+<div class="skills" markdown="1">
 
 - **Backend Languages & Frameworks:** Node.js (TypeScript/JavaScript), NestJS, Java, Spring Boot, Python, Flask, Go, PHP
 - **Databases & Caching:** MariaDB, MySQL, PostgreSQL, MongoDB, Redis, Cassandra
@@ -92,6 +110,8 @@ _서버 개발자 / 정규직_
 - **Architecture & AI Engineering:**
   - Domain-Driven Design (DDD), Port-Adapter Architecture (Hexagonal Architecture), Monorepo Design, SSOT Pattern
   - Agentic Workflow Design, Strategic Context Management, Claude Code, Multi-Agent Orchestration (에이전트 멀티플렉서, Herdr), Session Implementation Plan (SIP)
+
+</div>
 
 ---
 

@@ -5,18 +5,30 @@
 */
 
 :root {
-  --bg-color: #ffffff;
-  --text-main: #1f2328;
-  --text-muted: #57606a;
-  --text-dark: #8c959f;
-  --border-color: #d8dee4;
-  --card-bg-completed: #f6f8fa;
-  --card-bg-progress: #eef1f4;
-  --accent-color: #0969da;
-  --badge-completed-bg: rgba(26, 127, 55, 0.12);
-  --badge-completed-text: #1a7f37;
-  --badge-progress-bg: rgba(31, 35, 40, 0.06);
-  --badge-progress-text: #57606a;
+  --bg-color: #fcfcfb;
+  --text-main: #16181d;
+  --text-muted: #5b6470;
+  --text-dark: #8b929c;
+  --border-color: #e2e4e7;
+  --card-bg-completed: #ffffff;
+  --card-bg-progress: #f5f6f5;
+
+  /*
+    2단 액센트.
+    --accent-color : 딥 톤. 텍스트·링크용 (흰 배경 대비 5.2:1, WCAG AA 통과).
+    --accent-pop   : 팝 민트. 채움·마커 전용. 이 색 위에는 반드시 --accent-ink를
+                     글자색으로 쓸 것 (8.8:1). 밝아서 흰 배경 위 글자색으로는 못 씀.
+  */
+  --accent-color: #0d7a68;
+  --accent-pop: #14e0b8;
+  --accent-pop-hover: #0fcda8;
+  --accent-ink: #0b2f28;
+  --accent-soft: rgba(20, 224, 184, 0.16);
+
+  --badge-completed-bg: rgba(13, 122, 104, 0.10);
+  --badge-completed-text: #0d7a68;
+  --badge-progress-bg: rgba(22, 24, 29, 0.055);
+  --badge-progress-text: #5b6470;
 }
 
 * {
@@ -30,9 +42,13 @@
   (16px → 18px → 20px → 22px), which made resume/ai-experience text
   visibly bigger than the homepage. Pin it to one fixed size across
   the whole site instead.
+
+  사이트의 거의 모든 치수가 rem 기반이라 이 값 하나로 전체 크기가 정해진다.
+  18px에서 본문이 커 보여 웹 본문 표준인 16px로 내렸다. 다시 올릴 경우
+  아래 .kv 라벨 폭(px 고정)과 히어로 줄바꿈 기준점도 함께 확인할 것.
 */
 html {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 ::-moz-selection {
@@ -55,8 +71,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/*
+  860px였으나, 히어로 본문을 쉼표 단위로 끊었을 때 두 번째 절(최대 832px)이
+  한 줄에 들어가지 않아 940px로 넓혔다. 이 값을 다시 줄이면 본문이 3줄로
+  흐르므로 함께 확인할 것.
+*/
 .container {
-  max-width: 860px;
+  max-width: 940px;
   margin: 0 auto;
   padding: 80px 24px;
 }
@@ -75,37 +96,115 @@ header.site-header {
   border-bottom: 1px solid var(--border-color);
 }
 
-header.site-header a.site-title {
+/*
+  로고 영역: '이름 | 직군'을 한 줄로. 이름만 있으면 "그래서 누구?"가 남는다.
+  2행 구조였을 때 이름이 직군 라벨 위에서 가운데로 밀리는 문제가 있어
+  베이스라인 정렬 한 줄로 바꿨다.
+*/
+header.site-header .site-brand {
+  display: inline-flex;
+  /*
+    baseline 정렬이면 작은 모노 라벨이 이름의 베이스라인에 붙어 아래로 처진다.
+    이름 높이의 상하 중앙에 오도록 center로 맞춘다.
+  */
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+header.site-header .site-brand-sep {
+  width: 1px;
+  height: 0.9em;
+  background-color: var(--border-color);
+}
+
+header.site-header .site-title {
   font-family: 'Outfit', sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.22rem;
   font-weight: 700;
   color: var(--text-main);
   text-decoration: none;
   letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+header.site-header .site-role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text-dark);
 }
 
 header.site-header nav {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 1.25rem;
 }
 
-header.site-header nav a {
+header.site-header nav a.nav-link {
   font-family: 'Outfit', sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 500;
   color: var(--text-muted);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-header.site-header nav a:hover {
-  color: var(--text-main);
+header.site-header nav a.nav-link:hover {
+  color: var(--accent-color);
 }
 
 header.site-header nav .nav-divider {
   color: var(--border-color);
   font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   Buttons
+   이력서가 이 사이트의 목적이므로 "이력서 보기"만 팝 민트 채움으로 승격하고
+   나머지 링크는 텍스트/아웃라인으로 낮춰 위계를 만든다.
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 9px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.btn--pop {
+  background-color: var(--accent-pop);
+  color: var(--accent-ink);
+}
+
+.btn--pop:hover {
+  background-color: var(--accent-pop-hover);
+  color: var(--accent-ink);
+  transform: translateY(-1px);
+}
+
+.btn--ghost {
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+}
+
+.btn--ghost:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.btn--sm {
+  font-size: 0.82rem;
+  padding: 7px 14px;
 }
 
 /* Footer */
@@ -160,65 +259,568 @@ footer.site-footer a:hover {
   }
 }
 
-/* minimal-mistakes ships the TOC at ~0.7em (and shrinks it further on
-   wide screens) — too small next to the rest of the article text. */
-.portfolio-toc .nav__title {
-  font-size: 1rem;
-}
+/* ==========================================================================
+   Article pages (resume / ai-experience) — 시안 1 "Consistent"
+   홈(custom-home.html)과 같은 시각 문법을 그대로 가져온다.
+   섹션 라벨 = 홈의 Services 라벨, 카드 = 홈의 프로젝트 카드,
+   민트는 타임라인 점 / 현재 위치 / 불릿에만 절제해서 쓴다.
+   ========================================================================== */
 
-.portfolio-toc .toc__menu {
-  font-size: 0.95rem;
-}
-
-.portfolio-toc .toc__menu a {
-  padding: 0.4rem 0.9rem;
+/* 문서 상단 이름 + 연락처 */
+.portfolio-article > h1:first-child {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.3rem;
+  border-bottom: 0;
 }
 
 /*
-  Work Experience (resume.md): every company block starts with a
-  "_역할 / 재직상태_" line, then either a lead description paragraph with a
-  flat bullet list (지오아이티/더커머스/빌리지피플), or several
-  "- **Project (period)**" entries each with their own description +
-  nested detail bullets (피에스에듀홀딩스). Scoping every rule off that
-  role line keeps this from also matching unrelated nested lists elsewhere
-  on the page (e.g. Technical Skills' "Architecture & AI Engineering").
+  이름 바로 아래 'Email: ...' 줄.
+  ai-experience.md는 h1 다음이 일반 본문이라 :has()로 좁혀 잡는다.
+  (마크다운의 '**Email:** ...' 구조 = p의 첫 자식이 strong)
 */
-
-/* Project/company header line: drop the bullet, it already reads as a
-   heading via the bold text. */
-.page__content p:has(> em) + ul > li:has(> ul) {
-  list-style: none;
-}
-
-.page__content p:has(> em) + ul > li:has(> ul) + li:has(> ul) {
-  margin-top: 1.5rem;
-}
-
-/* Lead description — the sentence right under the title/role, before the
-   detail bullets. Italic + muted is enough to read as a subordinate line. */
-.page__content p:has(> em) + ul > li:has(> ul) > p + p,
-.page__content p:has(> em) + p {
-  font-style: italic;
+.portfolio-article > h1:first-child + p:has(> strong:first-child) {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
   color: var(--text-muted);
+  margin-bottom: 1.6rem;
 }
 
-/* Detail bullets — same small dot, but plain text color so it still
-   matches the default bullets used everywhere else on the page (e.g.
-   Technical Skills). */
-.page__content p:has(> em) + ul > li:has(> ul) > ul > li,
-.page__content p:has(> em) + p + ul > li {
+.portfolio-article > h1:first-child + p:has(> strong:first-child) strong {
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+/* 마크다운의 '---'(hr)는 섹션 라벨이 이미 구분선을 갖고 있어 불필요 */
+.portfolio-article hr {
+  display: none;
+}
+
+/*
+  섹션 라벨 — 홈의 'SERVICES'와 같은 형태(대문자 + 오른쪽 하이라인).
+  다만 홈은 카드 묶음의 부제라 작아도 되지만, 여기서는 문서의 뼈대이고
+  ai-experience는 제목이 한글이라 0.82rem/0.16em으로는 읽히지 않는다.
+  크기와 색을 올리고 자간을 줄여 두 언어 모두에서 제목으로 읽히게 한다.
+*/
+.portfolio-article h2 {
+  font-family: 'Outfit', sans-serif;
+  /*
+    본문 16px / h3 17.9px / h2 20px / 문서 제목 32px 순으로 위계를 벌린다.
+    1.05rem(16.8px)일 때는 본문과 0.8px 차이뿐이라 h3를 그 사이에 둘 자리가
+    없었다. 자간은 크기가 커진 만큼 0.08em -> 0.06em으로 줄인다.
+  */
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 2.8rem 0 1.4rem;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.portfolio-article h2::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--border-color);
+}
+
+/*
+  회사 블록. resume.md에서 <div class="job" markdown="1">로 감싼다.
+  래퍼가 없으면 좌측 타임라인 축을 이을 수 없다(CSS는 '다음 h3 전까지'를
+  선택할 수 없음). 회사를 추가할 때 래퍼도 함께 쓸 것.
+*/
+.portfolio-article .job {
   position: relative;
-  list-style: none;
+  border-left: 2px solid var(--border-color);
+  padding-left: 22px;
+  /* 회사 사이 간격을 margin이 아닌 padding으로 줘야 좌측 축이 끊기지 않고
+     하나의 타임라인으로 이어진다. */
+  padding-bottom: 2.2rem;
 }
 
-.page__content p:has(> em) + ul > li:has(> ul) > ul > li::before,
-.page__content p:has(> em) + p + ul > li::before {
+.portfolio-article .job:last-of-type {
+  padding-bottom: 0.5rem;
+}
+
+.portfolio-article .job::before {
   content: '';
   position: absolute;
-  left: -1rem;
-  top: 0.55em;
+  left: -5px;
+  top: 0.62em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-pop);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/*
+  '### **회사명** (기간)' 구조를 그대로 활용한다.
+  볼드 = 회사명, 나머지 텍스트 = 기간. 마크업 수정 없이 분리된다.
+*/
+.portfolio-article .job > h3 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--text-dark);
+  margin: 0 0 0.15rem;
+}
+
+/*
+  회사명 강조. 프로젝트 제목(0.94rem)과 크기 차이가 2px뿐이라 회사가 한
+  단위로 잡히지 않던 것을, 크기를 키우고 홈 히어로와 같은 민트 하이라이터를
+  깔아 해결한다. 하이라이터는 글자 뒤에 깔리므로 대비에 영향을 주지 않는다.
+*/
+.portfolio-article .job > h3 strong {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.85em;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text-main);
+  margin-right: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.portfolio-article .job > h3 strong::after {
+  content: '';
+  position: absolute;
+  left: -0.05em;
+  right: -0.05em;
+  bottom: 0.02em;
+  height: 0.32em;
+  background-color: var(--accent-pop);
+  opacity: 0.42;
+  border-radius: 2px;
+  z-index: -1;
+}
+
+/* '_서버 개발자 / 정규직_' 역할 줄 */
+.portfolio-article .job > p:has(> em) {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 0.9rem;
+}
+
+.portfolio-article .job > p:has(> em) em {
+  font-style: normal;
+}
+
+.portfolio-article .job > ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+/* 프로젝트 단위(하위 ul을 가진 항목) */
+.portfolio-article .job > ul > li:has(> ul) {
+  margin-bottom: 1.3rem;
+}
+
+.portfolio-article .job > ul > li:has(> ul) > p:first-child {
+  font-size: 0.94rem;
+  margin-bottom: 0.3rem;
+}
+
+.portfolio-article .job > ul > li:has(> ul) > p:first-child strong {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* 프로젝트 설명 문단 — 상세 불릿과 구분되도록 낮춘다 */
+.portfolio-article .job > ul > li:has(> ul) > p + p,
+.portfolio-article .job > p:has(> em) + p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+
+/* 상세 불릿 — 중첩 구조와 평면 구조 모두 대응 */
+.portfolio-article .job > ul > li > ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.portfolio-article .job > ul > li > ul > li,
+.portfolio-article .job > ul > li:not(:has(> ul)) {
+  position: relative;
+  padding-left: 16px;
+  margin-bottom: 0.45rem;
+  font-size: 0.88rem;
+}
+
+.portfolio-article .job > ul > li > ul > li::before,
+.portfolio-article .job > ul > li:not(:has(> ul))::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--text-main);
+  background-color: var(--accent-pop);
+}
+
+/* Technical Skills 등 .job 바깥의 일반 목록도 같은 불릿을 쓴다 */
+.portfolio-article > ul,
+.portfolio-article .skills > ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.portfolio-article > ul > li,
+.portfolio-article .skills > ul > li {
+  position: relative;
+  padding-left: 16px;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.portfolio-article > ul > li::before,
+.portfolio-article .skills > ul > li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--accent-pop);
+}
+
+.portfolio-article > ul > li > ul,
+.portfolio-article .skills > ul > li > ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.4rem;
+}
+
+.portfolio-article > ul > li > ul > li,
+.portfolio-article .skills > ul > li > ul > li {
+  position: relative;
+  padding-left: 14px;
+  margin-bottom: 0.3rem;
+  font-size: 0.86rem;
+  color: var(--text-muted);
+}
+
+.portfolio-article > ul > li > ul > li::before,
+.portfolio-article .skills > ul > li > ul > li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--border-color);
+}
+
+/*
+  Technical Skills — 분류명(볼드)을 한 줄로 세우고 항목을 그 아래로 내린다.
+  한 줄에 이어 쓰면 분류명과 나열이 뭉쳐 어디까지가 분류인지 읽히지 않는다.
+  resume.md에서 <div class="skills" markdown="1">로 감싼 목록에만 적용된다.
+*/
+.portfolio-article .skills > ul > li > strong {
+  display: block;
+  color: var(--text-main);
+  margin-bottom: 3px;
+}
+
+.portfolio-article .skills > ul > li {
+  margin-bottom: 0.9rem;
+}
+
+/*
+  ai-experience의 소제목. 본문(16px)보다는 확실히 크고 섹션 제목(20px)보다는
+  작아야 한다. 이력서의 회사명(.job > h3)은 별도 규칙이라 영향받지 않는다.
+*/
+.portfolio-article > h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.12rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  margin: 2rem 0 0.6rem;
+}
+
+/* ==========================================================================
+   ai-experience — 라벨/내용 카드(.kv)와 참고 블록(.ref)
+   본문·불릿이 한 흐름으로 뭉쳐 보이던 것을 덩어리로 분리한다.
+   ai-experience.md에서 <div class="kv" markdown="1">로 목록을 감싼다.
+   ========================================================================== */
+.portfolio-article .kv {
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background-color: #fff;
+  overflow: hidden;
+  margin-bottom: 1.2rem;
+}
+
+.portfolio-article .kv ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+/*
+  라벨은 absolute로 빼고 값은 일반 블록으로 둔다.
+  flex로 만들면 값 안의 <code> 같은 인라인 요소가 각각 flex 아이템이 되어
+  문장이 조각나므로 쓸 수 없다.
+*/
+.portfolio-article .kv > ul > li {
+  position: relative;
+  padding: 12px 16px 12px 152px;
+  border-top: 1px solid var(--border-color);
+  margin: 0;
+  font-size: 0.87rem;
+  color: var(--text-muted);
+  word-break: keep-all;
+}
+
+.portfolio-article .kv > ul > li::before {
+  content: none;
+}
+
+.portfolio-article .kv > ul > li:first-child {
+  border-top: 0;
+}
+
+/*
+  라벨 열. 마크다운은 '- **라벨:** 내용' 형태로 콜론을 볼드 안에 둔다.
+  CSS가 적용되지 않아도 '라벨: 내용'으로 자연스럽게 읽히게 하기 위함.
+
+  반드시 :first-child로 한정할 것. 그냥 'li > strong'으로 잡으면 값 안에
+  들어간 볼드(예: 수치 강조)까지 라벨로 인식해 absolute로 겹쳐 버린다.
+*/
+.portfolio-article .kv > ul > li > strong:first-child {
+  position: absolute;
+  left: 16px;
+  top: 12px;
+  /* 가장 긴 라벨('승인 대기 관리:')이 한 줄에 들어가는 값 */
+  width: 122px;
+  padding-left: 13px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+.portfolio-article .kv > ul > li > strong:first-child::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--accent-pop);
+}
+
+/* 라벨이 긴 절에서 쓴다 (예: '에이전트의 1차 제안:') */
+.portfolio-article .kv--wide > ul > li {
+  padding-left: 206px;
+}
+
+.portfolio-article .kv--wide > ul > li > strong:first-child {
+  width: 176px;
+}
+
+/* 값 안의 인라인 코드가 덩어리져 보이지 않게 낮춘다 */
+.portfolio-article .kv > ul > li code {
+  font-size: 0.86em;
+  padding: 1px 5px;
+}
+
+@media (max-width: 600px) {
+  .portfolio-article .kv > ul > li,
+  .portfolio-article .kv--wide > ul > li {
+    padding-left: 16px;
+  }
+
+  .portfolio-article .kv > ul > li > strong:first-child,
+  .portfolio-article .kv--wide > ul > li > strong:first-child {
+    position: static;
+    display: block;
+    width: auto;
+    white-space: normal;
+    margin-bottom: 4px;
+  }
+}
+
+/*
+  AI 활용 원칙 — 사례를 읽기 전에 판단 기준을 한눈에 보여주는 요약.
+  본문 섹션이 아니라 보조 요약이므로 h2를 두지 않고(목차에도 잡히지 않음)
+  카드도 작게 유지한다.
+*/
+.portfolio-article .principles {
+  margin-bottom: 1.6rem;
+}
+
+.portfolio-article .principles > ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.portfolio-article .principles > ul > li {
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 13px 15px;
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  word-break: keep-all;
+}
+
+.portfolio-article .principles > ul > li::before {
+  content: none;
+}
+
+.portfolio-article .principles > ul > li > strong {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  margin-bottom: 5px;
+  position: relative;
+  padding-left: 12px;
+}
+
+.portfolio-article .principles > ul > li > strong::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--accent-pop);
+}
+
+@media (max-width: 700px) {
+  .portfolio-article .principles > ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 참고 블록 — 본문에서 '(배경은 … 참고)'를 빼내 따로 세운다 */
+.portfolio-article .ref {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  border-left: 3px solid var(--accent-pop);
+  background-color: var(--card-bg-progress);
+  border-radius: 0 8px 8px 0;
+  padding: 10px 14px;
+  margin: 0 0 1.2rem;
+}
+
+.portfolio-article .ref p {
+  margin: 0;
+  font-size: 0.84rem;
+  color: var(--text-muted);
+}
+
+.portfolio-article .ref p strong {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72em;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  margin-right: 8px;
+}
+
+/* ==========================================================================
+   목차(TOC) — 홈의 프로젝트 카드와 같은 형태
+   ========================================================================== */
+.portfolio-toc .toc {
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background-color: #fff;
+  overflow: hidden;
+  box-shadow: none;
+}
+
+/* 카드 상단 민트 바 */
+.portfolio-toc .toc::before {
+  content: '';
+  display: block;
+  height: 3px;
+  background-color: var(--accent-pop);
+}
+
+.portfolio-toc .nav__title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  background: none;
+  border-radius: 0;
+  padding: 14px 16px 6px;
+  margin: 0;
+}
+
+.portfolio-toc .nav__title i {
+  display: none;
+}
+
+.portfolio-toc .toc__menu {
+  font-size: 0.86rem;
+  padding-bottom: 10px;
+}
+
+.portfolio-toc .toc__menu a {
+  padding: 0.4rem 16px;
+  color: var(--text-muted);
+  border-bottom: 0;
+}
+
+.portfolio-toc .toc__menu a:hover {
+  color: var(--accent-color);
+  background-color: var(--card-bg-progress);
+}
+
+.portfolio-toc .toc__menu .active a,
+.portfolio-toc .toc__menu a.active {
+  color: var(--accent-color);
+  font-weight: 600;
+  background-color: var(--accent-soft);
+  box-shadow: inset 3px 0 0 var(--accent-pop);
+}
+
+.portfolio-toc .toc__menu li ul a {
+  padding-left: 30px;
+  font-size: 0.94em;
+}
+
+/* 본문 링크 */
+.portfolio-article a {
+  color: var(--accent-color);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent-soft);
+}
+
+.portfolio-article a:hover {
+  border-bottom-color: var(--accent-color);
 }
