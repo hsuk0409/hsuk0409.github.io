@@ -106,7 +106,7 @@ _서버 개발자 / 정규직_
 
 <div class="skills" markdown="1">
 
-- **Backend Languages & Frameworks:** Node.js (TypeScript/JavaScript), NestJS, Java, Spring Boot, Python, Flask, Go, PHP
+- **Backend Languages & Frameworks:** Node.js (TypeScript/JavaScript), NestJS, Java, Spring Boot, Python, Flask, PHP
 - **Databases & Caching:** MariaDB, MySQL, PostgreSQL, MongoDB, Redis, Cassandra
 - **Infrastructure & DevOps:** Docker, AWS (Lambda, API Gateway), Linux, GitHub Actions, GHCR, New Relic, PMM
 - **Architecture & AI Engineering:**
